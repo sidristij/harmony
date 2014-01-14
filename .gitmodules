@@ -7,3 +7,6 @@
 [submodule "libs/json.net"]
 	path = libs/json.net
 	url = https://github.com/JamesNK/Newtonsoft.Json
+[submodule "libs/nrefactory"]
+	path = libs/nrefactory
+	url = https://github.com/icsharpcode/NRefactory
