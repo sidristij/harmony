@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{123C6C3A-7F12-40DD-8742-5C167F111BA2}</ProjectGuid>
+    <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Harmony.Sdk</RootNamespace>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <AssemblyName>Harmony</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <ConsolePause>false</ConsolePause>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseSGen>false</UseSGen>
+    <IncludeMonoRuntime>true</IncludeMonoRuntime>
+    <PlatformTarget>x86</PlatformTarget>
+    <LinkMode>Full</LinkMode>
+    <EnableCodeSigning>true</EnableCodeSigning>
+    <ConsolePause>false</ConsolePause>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <CreatePackage>true</CreatePackage>
+    <CodeSigningKey>Developer ID Application</CodeSigningKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\x86\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseSGen>false</UseSGen>
+    <IncludeMonoRuntime>true</IncludeMonoRuntime>
+    <PlatformTarget>x86</PlatformTarget>
+    <LinkMode>Full</LinkMode>
+    <EnableCodeSigning>true</EnableCodeSigning>
+    <ConsolePause>false</ConsolePause>
+    <EnablePackageSigning>true</EnablePackageSigning>
+    <CreatePackage>true</CreatePackage>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>_libs\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>_libs\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>_libs\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_libs\" />
+    <Folder Include="Messaging\" />
+    <Folder Include="Config\" />
+    <Folder Include="Tasks\" />
+    <Folder Include="Reactive\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AspectTargets.cs" />
+    <Compile Include="Reactive\AbstractObservableFilter.cs" />
+    <Compile Include="Reactive\AbstractObserver.cs" />
+    <Compile Include="Reactive\Observer.cs" />
+    <Compile Include="Reactive\AbstractObservable.cs" />
+    <Compile Include="Reactive\IObservable.cs" />
+    <Compile Include="Reactive\AbstractObserver.Result.cs" />
+    <Compile Include="Reactive\AbstractObservable.Result.cs" />
+    <Compile Include="Reactive\ObservableBase.cs" />
+    <Compile Include="Reactive\ObserverBase.cs" />
+    <Compile Include="Aspect\TypesLevel\TypeLevelAspect.cs" />
+    <Compile Include="Aspect\AspectBase.cs" />
+    <Compile Include="MulticastAttribute.cs" />
+    <Compile Include="Aspect\TypeLevelContext.cs" />
+    <Compile Include="Aspect\InstanceLevelContext.cs" />
+    <Compile Include="Config\ConfigSectionBase.cs" />
+    <Compile Include="Config\HarmonyConfigSection.cs" />
+    <Compile Include="Config\AspectConfigSection.cs" />
+    <Compile Include="Config\XmlConfigSectionDataProvider.cs" />
+    <Compile Include="Config\IConfigSectionDataProvider.cs" />
+    <Compile Include="Config\ConfigOverlapsAttribute.cs" />
+    <Compile Include="Tasks\TaskBase.cs" />
+    <Compile Include="Tasks\TasksExecutionPipe.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="FileDefinition.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="_libs\Mono.Cecil.Pdb.dll" />
+    <None Include="_libs\Mono.Cecil.Pdb.dll.mdb" />
+    <None Include="_libs\Mono.Cecil.Rocks.dll" />
+    <None Include="_libs\Mono.Cecil.Rocks.dll.mdb" />
+    <None Include="_libs\Mono.Cecil.dll" />
+    <None Include="_libs\Mono.Cecil.dll.mdb" />
+    <None Include="Info.plist" />
+    <None Include="Reactive\AbstractEventObserver.cs" />
+    <None Include="Reactive\Extensions\TakeUntil.cs" />
+    <None Include="Reactive\Extensions\SkipUntil.cs" />
+    <None Include="Reactive\Extensions\FromEvent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mono.Cecil.CodeDom\Mono.Cecil.CodeDom.csproj">
+      <Project>{0D6F8A09-C90C-42FD-8F61-33000849CA1E}</Project>
+      <Name>Mono.Cecil.CodeDom</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

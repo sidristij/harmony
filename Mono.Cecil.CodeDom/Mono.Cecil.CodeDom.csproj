@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D6F8A09-C90C-42FD-8F61-33000849CA1E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Mono.Cecil.CodeDom</RootNamespace>
+    <AssemblyName>Mono.Cecil.CodeDom</AssemblyName>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <newfilesearch>OnLoadAutoInsert</newfilesearch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\Harmony\_libs\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\Harmony\_libs\Mono.Cecil.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\FixedListByDelegate.cs" />
+    <Compile Include="Collections\IFixedList.cs" />
+    <Compile Include="Collections\FixedListAdapter.cs" />
+    <Compile Include="Parser\Branching\CodeDomCaseExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomSwitchExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomSwitchIndexExpression.cs" />
+    <Compile Include="Parser\SimpleExpressions\LoadMetadataTokenExpression.cs" />
+    <Compile Include="Parser\SimpleExpressions\SizeofExpression.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Parser\CodeDomParserBase.cs" />
+    <Compile Include="Parser\CodeDomParsingDeep.cs" />
+    <Compile Include="Parser\CodeDom.cs" />
+    <Compile Include="Parser\CodeDomParser.cs" />
+    <Compile Include="Parser\Arrays\CreateArrayExpression.cs" />
+    <Compile Include="Parser\Arrays\ArrayLengthExpression.cs" />
+    <Compile Include="Parser\Arrays\ArrayGetItemExpression.cs" />
+    <Compile Include="Parser\Arrays\ArraySetItemExpression.cs" />
+    <Compile Include="Parser\Members\FieldSetExpression.cs" />
+    <Compile Include="Parser\Members\FieldGetExpression.cs" />
+    <Compile Include="Parser\Members\FieldGetRefExpression.cs" />
+    <Compile Include="Parser\Members\FieldSetRefExpression.cs" />
+    <Compile Include="Parser\Members\VariableSetExpression.cs" />
+    <Compile Include="Parser\Members\VariableGetExpression.cs" />
+    <Compile Include="Parser\Members\ParameterSetExpression.cs" />
+    <Compile Include="Parser\Members\ParameterGetExpression.cs" />
+    <Compile Include="CodeDomExpression.cs" />
+    <Compile Include="ICodeDomStaticInstance.cs" />
+    <Compile Include="InstructionsRange.cs" />
+    <Compile Include="Rocks\Cast.cs" />
+    <Compile Include="Rocks\Cil\ModuleDefinitionEx.cs" />
+    <Compile Include="Rocks\Hierarсhy.cs" />
+    <Compile Include="Rocks\MethodDef.cs" />
+    <Compile Include="Rocks\MethodRef.cs" />
+    <Compile Include="Rocks\TypeDef.cs" />
+    <Compile Include="Rocks\TypeRef.cs" />
+    <Compile Include="Parser\Elementary\PushExpression.cs" />
+    <Compile Include="Parser\Elementary\PushNullExpression.cs" />
+    <Compile Include="Parser\Creators\InitStructExpression.cs" />
+    <Compile Include="CodeDomCastingExpression.cs" />
+    <Compile Include="Parser\Casting\CastValueExpression.cs" />
+    <Compile Include="Parser\Creators\CreateObjectExpression.cs" />
+    <Compile Include="Rocks\Cil\Cast.cs" />
+    <Compile Include="Parser\Branching\MethodCallExpression.cs" />
+    <Compile Include="Parser\Branching\ReturnExpression.cs" />
+    <Compile Include="Parser\Pointers\PtrCastToMethodHandlerExpression.cs" />
+    <Compile Include="Collections\FixedList.cs" />
+    <Compile Include="Parser\Context.cs" />
+    <Compile Include="Parser\Tcf\TryExpression.cs" />
+    <Compile Include="Collections\MergedList.cs" />
+    <Compile Include="CodeDomGroupExpression.cs" />
+    <Compile Include="ICodeDomEditableGroup.cs" />
+    <Compile Include="CodeDomSingleInstructionExpression.cs" />
+    <Compile Include="CodeDomUnparsedExpression.cs" />
+    <Compile Include="Parser\Tcf\CatchBlockExpression.cs" />
+    <Compile Include="TextFormatter\ITextFormatter.cs" />
+    <Compile Include="Parser\Branching\CodeDomBranchingExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomBooleanBranchExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomComparingBranchExpression.cs" />
+    <Compile Include="Parser\CodeDomBranchesParser.cs" />
+    <Compile Include="Parser\Branching\CodeDomBoolConditionExpression.cs" />
+    <Compile Include="Rocks\FieldRef.cs" />
+    <Compile Include="Parser\Branching\CodeDomLoopExpression.cs" />
+    <Compile Include="Parser\SimpleExpressions\NegExpression.cs" />
+    <Compile Include="Parser\SimpleExpressions\NotExpression.cs" />
+    <Compile Include="Parser\Tcf\CkfiniteException.cs" />
+    <Compile Include="Parser\Tcf\ThrowExpression.cs" />
+    <Compile Include="Parser\Tcf\EndfilterExpression.cs" />
+    <Compile Include="Parser\Tcf\RethrowExpression.cs" />
+    <Compile Include="Parser\Tcf\CatchPushExpression.cs" />
+    <Compile Include="Rocks\NodeMatcherEx.cs" />
+    <Compile Include="Rocks\NodeEx.cs" />
+    <Compile Include="Contract\CanBeNullAttribute.cs" />
+    <Compile Include="Contract\NotNullAttribute.cs" />
+    <Compile Include="Rocks\TypeSwitchEx.cs" />
+    <Compile Include="Rocks\Cil\OperationType.cs" />
+    <Compile Include="Rocks\Cil\OpCodesEx.cs" />
+    <Compile Include="Rocks\Cil\OverflowCheckType.cs" />
+    <Compile Include="Parser\Casting\BoxingExpression.cs" />
+    <Compile Include="Parser\Casting\UnboxingExpression.cs" />
+    <Compile Include="Parser\Casting\CastClassExpression.cs" />
+    <Compile Include="Parser\Casting\IsInstanceExpression.cs" />
+    <Compile Include="Parser\SimpleExpressions\Op.cs" />
+    <Compile Include="Parser\SimpleExpressions\SimpleExpression.cs" />
+    <Compile Include="Rocks\InstructionEx.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+</Project>

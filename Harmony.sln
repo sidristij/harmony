@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil.CodeDom", "Mono.Cecil.CodeDom\Mono.Cecil.CodeDom.csproj", "{0D6F8A09-C90C-42FD-8F61-33000849CA1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harmony.Test", "Harmony.Test\Harmony.Test.csproj", "{7E110221-62C1-4489-B08B-8666E0F96BBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AppStore|x86 = AppStore|x86
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.AppStore|x86.Build.0 = Release|Any CPU
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Release|x86.Build.0 = Release|Any CPU
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.AppStore|x86.ActiveCfg = Release|x86
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.AppStore|x86.Build.0 = Release|x86
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Debug|x86.ActiveCfg = Debug|x86
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Debug|x86.Build.0 = Debug|x86
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Release|x86.ActiveCfg = Release|x86
+		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Harmony.Test\Harmony.Test.csproj
+	EndGlobalSection
+EndGlobal
