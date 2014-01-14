@@ -32,10 +32,7 @@ namespace Mono.Cecil.CodeDom.Parser.Elementary
 
 		public override string ToString()
 		{
-			if(Value is string)
-				return string.Format("\"{0}\"", Value);
-			else
-				return string.Format("{0}", Value);
+			return (Value is string) ? string.Format("\"{0}\"", Value) : string.Format("{0}", Value);
 		}
 	}
 }

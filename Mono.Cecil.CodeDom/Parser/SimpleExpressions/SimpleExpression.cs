@@ -19,14 +19,6 @@ namespace Mono.Cecil.CodeDom.Parser.SimpleExpressions
 				throw new ArgumentOutOfRangeException(string.Format("SimpleExpression {0} requres two Expressions in the stack and each expression should to push to stack 1 value.", position.OpCode.Code));
 			}
 
-			// if type is not resolved, incoming args error
-			if (ReturnType == null)
-			{
-				var left_type = exp_left.ReturnType;
-				var right_type = exp_right.ReturnType;
-				throw new ArgumentException(string.Format("Error in {0} operator: incoming types are unsupported ({1}, {2})", position.OpCode.Code, left_type, right_type));
-			}
-
 			// base class
 			ReadsStack = 2;
 			WritesStack = 1;
@@ -79,7 +71,7 @@ namespace Mono.Cecil.CodeDom.Parser.SimpleExpressions
 			} 
 
 			// Return type resolved
-			ReturnType = context.Module.Import(metadataType.Value);		
+			ReturnType = context.Module.Import(metadataType.Value);
 		}
 
 		public CodeDomExpression Left

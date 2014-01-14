@@ -52,8 +52,8 @@ namespace Harmony.Test
 
 			foreach(var unparsed in superNode.SelectNodes<CodeDomUnparsedExpression>())
 			{
-				unparsed.ReplaceWith( codeparser.Parse(methoddef, unparsed.Instructions.First, unparsed.Instructions.Last, 
-									  unparsed.ParentNode as CatchBlockExpression));
+				var parsed = codeparser.Parse(methoddef, unparsed.Instructions.First, unparsed.Instructions.Last, unparsed.ParentNode as CatchBlockExpression);
+				unparsed.ReplaceWith(parsed);
 			}
 
 
@@ -66,12 +66,12 @@ namespace Harmony.Test
 			try {
 				if (simpleObject != null)
 				{
-					Console.WriteLine("Hello, {0} and {1}", integer, simpleObject);
+					Console.WriteLine("Hello, {0} and {1}", integer-10+5*integer/75, simpleObject);
 				}
 			}
 			finally
 			{
-				while (integer < 0)
+				while (integer - 6 > 0)
 				{
 					Console.WriteLine("in loop");
 				}

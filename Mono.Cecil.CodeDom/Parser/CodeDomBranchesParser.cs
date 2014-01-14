@@ -521,7 +521,7 @@ namespace Mono.Cecil.CodeDom.Parser
 
 			var ifelse = /*((current.OpCode.Code == Code.Brtrue) || (current.OpCode.Code == Code.Brfalse)) ?*/
 				new CodeDomBooleanBranchExpression(context, current, 
-					new CodeDomGroupExpression(context) { conditionNode }, 
+					conditionNode, 
 					new CodeDomGroupExpression(context) { trueNode }, 
 					new CodeDomGroupExpression(context) { falseNode }
 				);

@@ -17,12 +17,11 @@ namespace Mono.Cecil.CodeDom.Parser
 			return node;
 		}
 
-		public CodeDomGroupExpression Parse(MethodDefinition def_method, Instruction start, Instruction end = null, CatchBlockExpression catchBlock = null)
+		public CodeDomExpression Parse(MethodDefinition def_method, Instruction start, Instruction end = null, CatchBlockExpression catchBlock = null)
 		{
 			var current = start;
 			var last = end == null ? null : end.Next;
 			var context = new Context(def_method, this);
-			var root = new CodeDomGroupExpression(context);
 			var parsedNodes = new List<CodeDomExpression>();
 			CodeDomExpression exceptionVariable = null;
 
@@ -214,8 +213,9 @@ namespace Mono.Cecil.CodeDom.Parser
 					case Code.Ble_Un:   // if unsigned <= unsigned2
 					case Code.Blt_Un:   // if unsigned < unsigned2
 					{
-						// var target = (Instruction) current.Operand;
-						// TODO: yield return CodeDom.Branch(current, (CodeDomExpression)_stack.Pop(), Parse(_def_method, target), Parse(_def_method, Instruction.Next));
+						var right = _stack.Pop();
+						var left = _stack.Pop();
+						PushToStack(CodeDom.SimpleExpression(context, current, left, right));
 						current = current.Next;
 						break;
 					}
@@ -677,11 +677,23 @@ namespace Mono.Cecil.CodeDom.Parser
 						break;
 				}
 			}
+			
+			CodeDomExpression root = _stack.Any() ? _stack.Pop() : new CodeDomGroupExpression(context);
 
-			foreach (var node in parsedNodes)
+			if (parsedNodes.Any() && !root.IsGroup)
 			{
-				root.Add(node);
-				node.ParentNode = root;
+				throw new InvalidOperationException("Illegal app flow found: trying to push many parsed nodes into non-group node");
+			}
+
+		 	var group = root as CodeDomGroupExpression;
+
+			if (group != null)
+			{
+				foreach (var node in parsedNodes)
+				{
+					group.Add(node);
+					node.ParentNode = group;
+				}
 			}
 
 			// resolve catch variable
