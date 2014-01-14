@@ -78,19 +78,9 @@
     <Folder Include="Messaging\" />
     <Folder Include="Config\" />
     <Folder Include="Tasks\" />
-    <Folder Include="Reactive\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspectTargets.cs" />
-    <Compile Include="Reactive\AbstractObservableFilter.cs" />
-    <Compile Include="Reactive\AbstractObserver.cs" />
-    <Compile Include="Reactive\Observer.cs" />
-    <Compile Include="Reactive\AbstractObservable.cs" />
-    <Compile Include="Reactive\IObservable.cs" />
-    <Compile Include="Reactive\AbstractObserver.Result.cs" />
-    <Compile Include="Reactive\AbstractObservable.Result.cs" />
-    <Compile Include="Reactive\ObservableBase.cs" />
-    <Compile Include="Reactive\ObserverBase.cs" />
     <Compile Include="Aspect\TypesLevel\TypeLevelAspect.cs" />
     <Compile Include="Aspect\AspectBase.cs" />
     <Compile Include="MulticastAttribute.cs" />
@@ -116,10 +106,6 @@
     <None Include="_libs\Mono.Cecil.dll" />
     <None Include="_libs\Mono.Cecil.dll.mdb" />
     <None Include="Info.plist" />
-    <None Include="Reactive\AbstractEventObserver.cs" />
-    <None Include="Reactive\Extensions\TakeUntil.cs" />
-    <None Include="Reactive\Extensions\SkipUntil.cs" />
-    <None Include="Reactive\Extensions\FromEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mono.Cecil.CodeDom\Mono.Cecil.CodeDom.csproj">

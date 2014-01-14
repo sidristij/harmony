@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil.CodeDom", "Mono.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harmony.Test", "Harmony.Test\Harmony.Test.csproj", "{7E110221-62C1-4489-B08B-8666E0F96BBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harmony.Sdk", "Harmony\Harmony.Sdk.csproj", "{123C6C3A-7F12-40DD-8742-5C167F111BA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|x86 = AppStore|x86
@@ -18,6 +20,9 @@ Global
 		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Debug|x86.Build.0 = Debug|Any CPU
 		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{0D6F8A09-C90C-42FD-8F61-33000849CA1E}.Release|x86.Build.0 = Release|Any CPU
+		{123C6C3A-7F12-40DD-8742-5C167F111BA2}.AppStore|x86.ActiveCfg = AppStore|x86
+		{123C6C3A-7F12-40DD-8742-5C167F111BA2}.Debug|x86.ActiveCfg = Debug|x86
+		{123C6C3A-7F12-40DD-8742-5C167F111BA2}.Release|x86.ActiveCfg = Release|x86
 		{7E110221-62C1-4489-B08B-8666E0F96BBC}.AppStore|x86.ActiveCfg = Release|x86
 		{7E110221-62C1-4489-B08B-8666E0F96BBC}.AppStore|x86.Build.0 = Release|x86
 		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Debug|x86.ActiveCfg = Debug|x86
@@ -25,10 +30,10 @@ Global
 		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Release|x86.ActiveCfg = Release|x86
 		{7E110221-62C1-4489-B08B-8666E0F96BBC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Harmony.Test\Harmony.Test.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

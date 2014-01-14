@@ -9,14 +9,14 @@ using Harmony.Sdk;
 
 namespace Harmony.Aspect.TypesLevel
 {
-    public class TypeLevelAspect : AspectBase
-    {
+	public class TypeLevelAspect : AspectBase
+	{
 
-        Dictionary<string, IMemberDefinition> _exports = new Dictionary<string, IMemberDefinition>();
+		Dictionary<string, IMemberDefinition> _exports = new Dictionary<string, IMemberDefinition>();
 
-        protected virtual void LinkExports()
-        {
-            /*
+		protected virtual void LinkExports()
+		{
+			/*
             var thisType = GetType();
 
             // Collecting exported fields
@@ -37,34 +37,34 @@ namespace Harmony.Aspect.TypesLevel
                 // _exports.Add(member.Name, exportedField);
             }
             */
-            // Collecting exported methods
-            // Collecting exported properties
-            // Collecting exported events
-        }
-        
-        public IEnumerable<FieldDefinition> ExportedFields {
-            get {
-                return _exports.Where(kv => kv.Value is FieldDefinition).Select(field => field.Value as FieldDefinition);
-            }
-        }
+			// Collecting exported methods
+			// Collecting exported properties
+			// Collecting exported events
+		}
 
-        public IEnumerable<MethodDefinition> ExportedMethods {
-            get {
-                return _exports.Where(kv => kv.Value is MethodDefinition).Select(method => method.Value as MethodDefinition);
-            }
-        }
+		public IEnumerable<FieldDefinition> ExportedFields {
+			get {
+				return _exports.Where(kv => kv.Value is FieldDefinition).Select(field => field.Value as FieldDefinition);
+			}
+		}
 
-        public IEnumerable<PropertyDefinition> ExportedProperties {
-            get {
-                return _exports.Where(kv => kv.Value is PropertyDefinition).Select(prop => prop.Value as PropertyDefinition);
-            }
-        }
+		public IEnumerable<MethodDefinition> ExportedMethods {
+			get {
+				return _exports.Where(kv => kv.Value is MethodDefinition).Select(method => method.Value as MethodDefinition);
+			}
+		}
 
-        public IEnumerable<EventDefinition> ExportedEvents {
-            get {
-                return _exports.Where(kv => kv.Value is EventDefinition).Select(@event => @event.Value as EventDefinition);
-            }
-        }
-    }
+		public IEnumerable<PropertyDefinition> ExportedProperties {
+			get {
+				return _exports.Where(kv => kv.Value is PropertyDefinition).Select(prop => prop.Value as PropertyDefinition);
+			}
+		}
+
+		public IEnumerable<EventDefinition> ExportedEvents {
+			get {
+				return _exports.Where(kv => kv.Value is EventDefinition).Select(@event => @event.Value as EventDefinition);
+			}
+		}
+	}
 }
 
