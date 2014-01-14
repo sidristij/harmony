@@ -30,15 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\Harmony\_libs\Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\Harmony\_libs\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\Harmony\_libs\Mono.Cecil.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +41,22 @@
     <ProjectReference Include="..\Mono.Cecil.CodeDom\Mono.Cecil.CodeDom.csproj">
       <Project>{0D6F8A09-C90C-42FD-8F61-33000849CA1E}</Project>
       <Name>Mono.Cecil.CodeDom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\cecil\symbols\mdb\Mono.Cecil.Mdb.csproj">
+      <Project>{8559DD7F-A16F-46D0-A05A-9139FAEBA8FD}</Project>
+      <Name>Mono.Cecil.Mdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\cecil\Mono.Cecil.csproj">
+      <Project>{D68133BD-1E63-496E-9EDE-4FBDBF77B486}</Project>
+      <Name>Mono.Cecil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj">
+      <Project>{63E6915C-7EA4-4D76-AB28-0D7191EEA626}</Project>
+      <Name>Mono.Cecil.Pdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\cecil\rocks\Mono.Cecil.Rocks.csproj">
+      <Project>{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}</Project>
+      <Name>Mono.Cecil.Rocks</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

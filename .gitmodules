@@ -1,0 +1,6 @@
+[submodule "libs/restsharp"]
+	path = libs/restsharp
+	url = https://github.com/restsharp/RestSharp
+[submodule "libs/cecil"]
+	path = libs/cecil
+	url = https://github.com/jbevain/cecil

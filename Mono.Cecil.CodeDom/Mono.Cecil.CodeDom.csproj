@@ -34,12 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\Harmony\_libs\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\Harmony\_libs\Mono.Cecil.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\FixedListByDelegate.cs" />
@@ -131,4 +125,14 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\libs\cecil\Mono.Cecil.csproj">
+      <Project>{D68133BD-1E63-496E-9EDE-4FBDBF77B486}</Project>
+      <Name>Mono.Cecil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\cecil\rocks\Mono.Cecil.Rocks.csproj">
+      <Project>{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}</Project>
+      <Name>Mono.Cecil.Rocks</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

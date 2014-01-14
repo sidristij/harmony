@@ -81,11 +81,12 @@ namespace Mono.Cecil.CodeDom
 			var node = ParentNode;
 			var root = RootNode;
 			do {
-				var catchBlockExpression = root as CatchBlockExpression;
-				if(catchBlockExpression != null)
+				var catchBlock = node as CatchBlockExpression;
+				if(catchBlock != null)
 				{
-					yield return catchBlockExpression;
+					yield return catchBlock;
 				}
+				node = node.ParentNode;
 			} while(node != root);
 		}
 
