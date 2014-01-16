@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="TestAssemblyAccessor.cs" />
     <Compile Include="Instructions\ArrayLength.cs" />
+    <Compile Include="Instructions\ArrayGetSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libs\cecil\Mono.Cecil.csproj">

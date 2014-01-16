@@ -10,7 +10,7 @@ namespace Mono.Cecil.CodeDom.Tests
 	public class ArrayLength
 	{
 		int testField;
-		static int staticTestField;
+		long longTestField;
 
 		private void Length_To_Integer_Field_Method()
 		{
@@ -18,25 +18,29 @@ namespace Mono.Cecil.CodeDom.Tests
 			testField = arr.Length;
 		}
 
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
 		[Test]
 		public void Length_To_Integer_Field()
 		{
-			var module = TestAssemblyAccessor.Assembly.MainModule;
-			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(module, Length_To_Integer_Field_Method));
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, Length_To_Integer_Field_Method));
 			Console.WriteLine(method);
 		}
 
-		private void Length_To_Static_Integer_Field_Method()
+		private void Length_To_Long_Field_Method()
 		{
 			var arr = new int[10];
-			staticTestField = arr.Length;
+			longTestField = arr.LongLength;
 		}
 
+		/// <summary>
+		/// Basic test for <array>.LongLength 
+		/// </summary>
 		[Test]
-		public void Length_To_Static_Integer_Field()
+		public void Length_To_Long_Field()
 		{
-			var module = TestAssemblyAccessor.Assembly.MainModule;
-			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(module, Length_To_Static_Integer_Field_Method));
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, Length_To_Long_Field_Method));
 			Console.WriteLine(method);
 		}
 	}

@@ -1,11 +1,8 @@
-using System;
-using System.Reflection;
-using Mono.Cecil.CodeDom.Parser;
-using Mono.Cecil.CodeDom.Rocks;
-using Mono.Cecil.Rocks;
-using Mono.Cecil.CodeDom.Parser.Tcf;
 using System.Linq;
-using System.Dynamic;
+
+using Mono.Cecil.CodeDom.Parser;
+using Mono.Cecil.CodeDom.Parser.Tcf;
+using Mono.Cecil.Rocks;
 
 namespace Mono.Cecil.CodeDom.Tests
 {

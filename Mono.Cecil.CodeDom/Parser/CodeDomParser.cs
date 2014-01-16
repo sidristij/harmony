@@ -229,7 +229,6 @@ namespace Mono.Cecil.CodeDom.Parser
 					case Code.Callvirt:
 					{
 						var ref_method = (MethodReference)current.Operand;
-						var exp_instance = ref_method.HasThis ? _stack.Pop() : new CodeDomExpression(context);
 						var parametersCount = ref_method.Parameters.Count;
 
 						var methodParams = new CodeDomExpression[parametersCount];
@@ -237,6 +236,8 @@ namespace Mono.Cecil.CodeDom.Parser
 						{
 							methodParams[index] = _stack.Pop();
 						}
+
+						var exp_instance = ref_method.HasThis ? _stack.Pop() : new CodeDomExpression(context);
 
 						var exp_call = CodeDom.MethodCall(context, current, ref_method, exp_instance, methodParams.Reverse().ToArray());
 						if (!exp_call.IsFinal)
@@ -269,8 +270,7 @@ namespace Mono.Cecil.CodeDom.Parser
 					{
 						var index = _stack.Pop();
 						var @array = _stack.Pop();
-						var ref_type = (TypeReference)current.Operand;
-						PushToStack(CodeDom.ArrayGetItem(context, current, ref_type, @array, index));
+						PushToStack(CodeDom.ArrayGetItem(context, current, @array, index));
 						current = current.Next;
 						break;
 					}

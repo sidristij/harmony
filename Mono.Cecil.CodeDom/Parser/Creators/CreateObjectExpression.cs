@@ -1,6 +1,7 @@
 using System;
 using Mono.Cecil.Cil;
 using Mono.Cecil.CodeDom.Parser.Branching;
+using Mono.Cecil.CodeDom.Rocks;
 
 namespace Mono.Cecil.CodeDom.Parser.Creators
 {
@@ -20,7 +21,10 @@ namespace Mono.Cecil.CodeDom.Parser.Creators
 
 		public override string ToString()
 		{
-			return string.Format("new {0}({1})", MethodReference.DeclaringType, string.Join(", ", Parameters));
+			return 
+				ReturnType.IsArray 
+					? string.Format("new {0}[{1}]", MethodReference.DeclaringType.GetElementType(), string.Join(", ", Parameters))
+					: string.Format("new {0}({1})", MethodReference.DeclaringType, string.Join(", ", Parameters));
 		}
 	}
 }
