@@ -260,7 +260,7 @@ namespace Mono.Cecil.CodeDom.Parser
 			var current = from;
 			while (current != to)
 			{
-				Instruction found;
+				Instruction found = null;
 				Instruction target = current.Operand as Instruction;
 				var isWhileViaDoWhile = (HasOutgoingJump(current) && (current.OpCode.Code == Code.Br) && 
 				                         FindFlowControl(target, to, from, target.Previous, out found, true, FlowControl.Cond_Branch));

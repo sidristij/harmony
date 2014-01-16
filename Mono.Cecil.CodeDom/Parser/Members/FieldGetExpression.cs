@@ -18,7 +18,7 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 		public FieldGetExpression(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_instance)
 			: base(context, position)
 		{
-			if(!exp_instance.ReturnType.HardEquals(ref_field.DeclaringType))
+			if(!exp_instance.IsEmpty && !exp_instance.ReturnType.HardEquals(ref_field.DeclaringType))
 			{
 				throw new InvalidOperationException(string.Format("instance field '{0}' is not member of '{1}' type", ref_field.FullName, exp_instance.ReturnType.FullName));
 			}
@@ -65,7 +65,12 @@ namespace Mono.Cecil.CodeDom.Parser
 
 	public static partial class CodeDom
 	{
-		public static FieldGetExpression FieldGet(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_instance = null)
+        public static FieldGetExpression FieldGet(Context context, Instruction position, FieldReference ref_field)
+        {
+            return new FieldGetExpression(context, position, ref_field);
+        }
+
+		public static FieldGetExpression FieldGet(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_instance)
 		{
 			return new FieldGetExpression(context, position, ref_field, exp_instance);
 		}
