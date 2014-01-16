@@ -58,5 +58,9 @@
       <Project>{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}</Project>
       <Name>Mono.Cecil.Rocks</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mono.Cecil.CodeDom.Tests\Mono.Cecil.CodeDom.Tests.csproj">
+      <Project>{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}</Project>
+      <Name>Mono.Cecil.CodeDom.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 		public FieldSetExpression(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_value, CodeDomExpression exp_instance)
 			: base(context, position)
 		{
-			if (!exp_instance.ReturnType.HardEquals(ref_field.DeclaringType))
+			if (!exp_instance.IsEmpty && !exp_instance.ReturnType.HardEquals(ref_field.DeclaringType))
 			{
 				throw new InvalidOperationException(string.Format("instance field '{0}' is not member of '{1}' type", ref_field.FullName, exp_instance.ReturnType.FullName));
 			}
@@ -29,6 +29,9 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 				throw new InvalidOperationException(string.Format("instance field type '{0}' is not equals to value type '{1}'", ref_field.FieldType.FullName, exp_value.ReturnType.FullName));
 			}
 
+			// setup nodes list
+			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
+
 			// instance exp
 			InstanceExpression = exp_instance;
 
@@ -36,7 +39,6 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 			ReadsStack = InstanceExpression.IsEmpty ? 1 : 2;
 			WritesStack = 0;
 			ReturnType = Context.MakeRef(typeof(void));
-			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
 
 			// this
 			FieldReference = ref_field;
@@ -62,7 +64,7 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 
 		public override string ToString()
 		{
-			return string.Format("{0}.{1} = {2}{3}", InstanceExpression, FieldReference.Name, ValueExpression, FinalString);
+			return string.Format(IsStatic ? "{1} = {2}{3}" : "{0}.{1} = {2}{3}", InstanceExpression, FieldReference.Name, ValueExpression, FinalString);
 		}
 	}
 }
@@ -73,7 +75,12 @@ namespace Mono.Cecil.CodeDom.Parser
 
 	public static partial class CodeDom
 	{
-		public static FieldSetExpression FieldSet(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_value, CodeDomExpression exp_instance = null)
+		public static FieldSetExpression FieldSet(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_value)
+		{
+			return new FieldSetExpression(context, position, ref_field, exp_value);
+		}
+
+		public static FieldSetExpression FieldSet(Context context, Instruction position, FieldReference ref_field, CodeDomExpression exp_value, CodeDomExpression exp_instance)
 		{
 			return new FieldSetExpression(context, position, ref_field, exp_value, exp_instance);
 		}

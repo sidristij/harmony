@@ -1,7 +1,6 @@
 using System;
 using Mono.Cecil.Cil;
 using Mono.Cecil.CodeDom.Collections;
-using Mono.Cecil.CodeDom.Rocks;
 
 namespace Mono.Cecil.CodeDom.Parser.Arrays
 {
@@ -18,19 +17,13 @@ namespace Mono.Cecil.CodeDom.Parser.Arrays
 				throw new ArgumentException(string.Format("exp_array is not array ({0})", exp_array.ReturnType));
 			}
 
-			var arrayItemType = (exp_array.ReturnType as ArrayType).ElementType;
-			if(!arrayItemType.HardEquals(itemType))
-			{
-				throw new ArgumentException(string.Format("exp_array items type should be equal to itemType type (items: {0}, itemType: {1})", arrayItemType, itemType));
-			}
-
 			// setup parents
 			exp_array.ParentNode = this;
 
 			// base class
 			ReadsStack = 1;
 			WritesStack = 1;
-			ReturnType = itemType;
+			ReturnType = context.MakeRef<int>();
 			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
 
 			// this

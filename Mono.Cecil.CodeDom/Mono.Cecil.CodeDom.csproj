@@ -87,7 +87,6 @@
     <Compile Include="Collections\MergedList.cs" />
     <Compile Include="CodeDomGroupExpression.cs" />
     <Compile Include="ICodeDomEditableGroup.cs" />
-    <Compile Include="CodeDomSingleInstructionExpression.cs" />
     <Compile Include="CodeDomUnparsedExpression.cs" />
     <Compile Include="Parser\Tcf\CatchBlockExpression.cs" />
     <Compile Include="TextFormatter\ITextFormatter.cs" />
@@ -120,6 +119,8 @@
     <Compile Include="Parser\SimpleExpressions\Op.cs" />
     <Compile Include="Parser\SimpleExpressions\SimpleExpression.cs" />
     <Compile Include="Rocks\InstructionEx.cs" />
+    <Compile Include="Messaging\ParserStateException.cs" />
+    <Compile Include="Parser\SimpleExpressions\CodeDomSingleInstructionExpression.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -134,5 +135,8 @@
       <Project>{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC}</Project>
       <Name>Mono.Cecil.Rocks</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messaging\" />
   </ItemGroup>
 </Project>

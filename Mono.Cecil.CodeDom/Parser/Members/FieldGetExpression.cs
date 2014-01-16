@@ -54,7 +54,7 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 
 		public override string ToString()
 		{
-			return string.Format("{0}.{1}", InstanceExpression, FieldReference.Name);
+			return string.Format(IsStatic ? "{1}" : "{0}.{1}", InstanceExpression, FieldReference.Name);
 		}
 	}
 }

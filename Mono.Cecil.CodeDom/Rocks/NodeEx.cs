@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Mono.Cecil.CodeDom
 {
-	internal static class NodeEx
+	public static class NodeEx
 	{
 		private static void Visit<T>([NotNull] this CodeDomExpression node, [CanBeNull] Action<T> preorderAction, [CanBeNull] Action<T> postorderAction) where T : CodeDomExpression
 		{
@@ -234,6 +234,26 @@ namespace Mono.Cecil.CodeDom
 			HashSet<CodeDomExpression> subTree = new HashSet<CodeDomExpression>();
 			node.VisitPostorder<CodeDomExpression>(subNode => subTree.Add(subNode));
 			return subTree;
+		}
+
+		public static IEnumerable<TResult> SelectNodes<TResult>(this CodeDomExpression node, Predicate<TResult> checker = null) where TResult: class 
+		{
+			var queue = new Queue<CodeDomExpression>();
+			queue.Enqueue(node);
+			while(queue.Count > 0)
+			{
+				var current = queue.Dequeue();
+				var ok = checker == null || checker(current as TResult);
+				if ((current is TResult) && ok)
+				{
+					yield return current as TResult;
+				}
+
+				foreach (var item in current.Nodes)
+				{
+					queue.Enqueue(item);
+				}
+			}
 		}
 	}
 }

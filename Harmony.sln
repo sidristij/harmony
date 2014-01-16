@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newtonsoft.Json", "libs\jso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.NRefactory", "libs\nrefactory\ICSharpCode.NRefactory\ICSharpCode.NRefactory.csproj", "{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil.CodeDom.Tests", "Mono.Cecil.CodeDom.Tests\Mono.Cecil.CodeDom.Tests.csproj", "{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|x86 = AppStore|x86
@@ -129,6 +131,36 @@ Global
 		{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}.winphone_Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}.winphone_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.AppStore|x86.Build.0 = Release|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_2_0_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_2_0_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_3_5_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_3_5_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_0_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_0_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_5_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.net_4_5_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.Release|x86.Build.0 = Release|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.silverlight_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.silverlight_Release|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.winphone_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF2750-9C5C-47C6-ACAC-8C771B5155DD}.winphone_Release|Any CPU.Build.0 = Debug|Any CPU
 		{63E6915C-7EA4-4D76-AB28-0D7191EEA626}.AppStore|x86.ActiveCfg = net_2_0_Release|Any CPU
 		{63E6915C-7EA4-4D76-AB28-0D7191EEA626}.AppStore|x86.Build.0 = net_2_0_Release|Any CPU
 		{63E6915C-7EA4-4D76-AB28-0D7191EEA626}.Debug|x86.ActiveCfg = net_2_0_Debug|Any CPU
@@ -320,7 +352,7 @@ Global
 		{FBC6DD59-D09D-499C-B03C-99C1C78FF2AC} = {C5738626-3BE6-4670-9C39-AB3E80EE4BA6}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Harmony.Test\Harmony.Test.csproj
+		StartupItem = Mono.Cecil.CodeDom.Tests\Mono.Cecil.CodeDom.Tests.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

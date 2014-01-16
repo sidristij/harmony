@@ -672,20 +672,22 @@ namespace Mono.Cecil.CodeDom.Parser
 					}
 
 					default:
+						Console.WriteLine("Uncovered instruction found: {0} on 0x{1:X} ", current.OpCode.Code, current.Offset);
 						parsedNodes.Add(CodeDom.UncoveredInstruction(context, current));
 						current = current.Next;
 						break;
 				}
 			}
-			
+
+			// If stack contains resulting expression, we couldn't create group for it. Else group should be created
 			CodeDomExpression root = _stack.Any() ? _stack.Pop() : new CodeDomGroupExpression(context);
 
 			if (parsedNodes.Any() && !root.IsGroup)
 			{
-				throw new InvalidOperationException("Illegal app flow found: trying to push many parsed nodes into non-group node");
+				throw new ParserStateException("Illegal app flow found: trying to push many parsed nodes into non-group node");
 			}
 
-		 	var group = root as CodeDomGroupExpression;
+			var group = root as CodeDomGroupExpression;
 
 			if (group != null)
 			{

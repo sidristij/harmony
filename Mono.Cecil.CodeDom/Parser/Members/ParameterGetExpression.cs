@@ -26,11 +26,24 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 			ParameterReference = ref_parameter;
 		}
 
+		bool? _isThis;
+		public bool IsThis 
+		{
+			get
+			{
+				if (!_isThis.HasValue)
+				{
+					_isThis = new bool?(ParameterReference.Index == -1);
+				}
+				return _isThis.Value;
+			}
+		}
+
 		public ParameterReference ParameterReference  { get; private set; }
 
 		public override string ToString()
 		{
-			return string.Format("{0}", ParameterReference);
+			return string.Format(IsThis ? "this": "{0}", ParameterReference);
 		}
 	}
 }

@@ -19,9 +19,9 @@ namespace Mono.Cecil.CodeDom.Parser.Arrays
 			}
 
 			// check is length type is int16
-			if(exp_length.ReturnType.MetadataType.GetTypeCode() != TypeCode.Int16)
+			if(exp_length.ReturnType.MetadataType != MetadataType.Int32)
 			{
-				throw new ArgumentException(string.Format("exp_length should be System.Int16 ({0})", exp_length.ReturnType));
+				throw new ArgumentException(string.Format("exp_length should be System.Int32 ({0})", exp_length.ReturnType));
 			}
 
 			// base class
