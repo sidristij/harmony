@@ -40,6 +40,37 @@ namespace Mono.Cecil.CodeDom.Tests
 			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_To_Integer_Field_Method));
 			Console.WriteLine(method);
 		}
+		private void ArrayGetOneDimension_From_Integer_Field_Method()
+		{
+			var arr = new int[10];
+			arr[0] = intField;
+		}
+
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetOneDimension_From_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetOneDimension_From_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
+
+		private void ArrayGetTwoDimension_From_Integer_Field_Method()
+		{
+			var arr = new int[10,10];
+			arr[0, 1] = intField;
+		}
+
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetTwoDimension_From_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_From_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
 	}
 }
 

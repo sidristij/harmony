@@ -12,7 +12,7 @@ namespace Mono.Cecil.CodeDom.Parser.Arrays
 		public const int ValuePos = 2;
 		public const int MaxNodes = 3;
 
-		public ArraySetItemExpression(Context context, Instruction position, TypeReference itemType, CodeDomExpression exp_array, CodeDomExpression exp_index, CodeDomExpression exp_value)
+		public ArraySetItemExpression(Context context, Instruction position, CodeDomExpression exp_array, CodeDomExpression exp_index, CodeDomExpression exp_value)
 			: base(context, position)
 		{
 			if(!(exp_array.ReturnType is ArrayType))
@@ -21,23 +21,19 @@ namespace Mono.Cecil.CodeDom.Parser.Arrays
 			}
 
 			var arrayItemType = (exp_array.ReturnType as ArrayType).ElementType;
-			if(!arrayItemType.HardEquals(itemType))
-			{
-				throw new ArgumentException(string.Format("exp_array items type should be equal to itemType type (items: {0}, itemType: {1})", arrayItemType, itemType));
-			}
 
-			if(exp_index.ReturnType.MetadataType.GetTypeCode() != TypeCode.Int32)
+			if(exp_index.ReturnType.MetadataType != MetadataType.Int32)
 			{
 				throw new ArgumentException(string.Format("exp_index should be Int16 ({0})", exp_index.ReturnType));
 			}
 
-			if(!itemType.HardEquals(exp_value.ReturnType))
+			if(!arrayItemType.HardEquals(exp_value.ReturnType))
 			{
 				throw new ArgumentException(string.Format("exp_value should have same type as all other parameters types (exp_value: {0}, others: {1})", exp_value.ReturnType, exp_index.ReturnType));
 			}
 
 			// base class
-			ReturnType = itemType;
+			ReturnType = arrayItemType;
 			ReadsStack = 2;
 			WritesStack = 0;
 			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
@@ -45,7 +41,7 @@ namespace Mono.Cecil.CodeDom.Parser.Arrays
 			ReturnType = TypeRef.Of(typeof(void), exp_value.MethodBody.Method.Module);
 
 			// this
-			ItemType = itemType;
+			ItemType = arrayItemType;
 			ArrayExpression = exp_array;
 			IndexExpression = exp_index;
 			ValueExpression = exp_value;
@@ -72,9 +68,9 @@ namespace Mono.Cecil.CodeDom.Parser
 
 	static partial class CodeDom
 	{
-		public static ArraySetItemExpression ArraySetItem(Context context, Instruction position, TypeReference itemType, CodeDomExpression exp_array, CodeDomExpression exp_index, CodeDomExpression exp_value)
+		public static ArraySetItemExpression ArraySetItem(Context context, Instruction position, CodeDomExpression exp_array, CodeDomExpression exp_index, CodeDomExpression exp_value)
 		{
-			return new ArraySetItemExpression(context, position, itemType, exp_array, exp_index, exp_value);
+			return new ArraySetItemExpression(context, position, exp_array, exp_index, exp_value);
 		}
 	}
 }

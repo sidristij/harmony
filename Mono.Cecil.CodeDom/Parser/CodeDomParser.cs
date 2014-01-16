@@ -288,8 +288,7 @@ namespace Mono.Cecil.CodeDom.Parser
 						var @value = _stack.Pop();
 						var index = _stack.Pop();
 						var @array = _stack.Pop();
-						var ref_type = (TypeReference)current.Operand;
-						parsedNodes.Add(CodeDom.ArraySetItem(context, current, ref_type, @array, index, @value));
+						parsedNodes.Add(CodeDom.ArraySetItem(context, current, @array, index, @value));
 						current = current.Next;
 						break;
 					}
