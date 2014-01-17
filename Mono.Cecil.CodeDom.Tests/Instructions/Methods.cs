@@ -123,6 +123,33 @@ namespace Mono.Cecil.CodeDom.Tests
 		{
 			Console.WriteLine(TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, Call_Create_With_Parameters_Method)));
 		}
+
+		#endregion
+
+		#region Creating structs
+		
+		public void Call_InitStruct_No_Params_Method()
+		{
+			Console.WriteLine(new DateTime());
+		}
+
+		[Test]
+		public void Call_InitStruct_No_Params()
+		{
+			Console.WriteLine(TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, Call_InitStruct_No_Params_Method)));
+		}
+		
+		public void Call_InitStruct_With_Params_Method()
+		{
+			Console.WriteLine(new DateTime(2013, 10, 30));
+		}
+
+		[Test]
+		public void Call_InitStruct_With_Params()
+		{
+			Console.WriteLine(TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, Call_InitStruct_With_Params_Method)));
+		}
+
 		#endregion
 	}
 }

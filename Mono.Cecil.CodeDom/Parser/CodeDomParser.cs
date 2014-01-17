@@ -591,7 +591,7 @@ namespace Mono.Cecil.CodeDom.Parser
 					{
 						var exp_instance = _stack.Pop();
 						var ref_type = (TypeReference)current.Operand;
-						PushToStack(CodeDom.InitStruct(context, current, exp_instance, ref_type));
+						parsedNodes.Add(CodeDom.InitStruct(context, current, exp_instance, ref_type));
 						current = current.Next;
 						break;
 					}

@@ -43,7 +43,7 @@ namespace Mono.Cecil.CodeDom.Parser.Creators
 
 		public override string ToString()
 		{
-			return string.Format("/*[InitStructExpression: InitAsType={0}, InstanceExpression={1}]*/", InitAsType, InstanceExpression);
+			return string.Format("var {1} = new {0}()", InitAsType, InstanceExpression);
 		}
 	}
 }
