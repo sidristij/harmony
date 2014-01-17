@@ -9,11 +9,11 @@ namespace Mono.Cecil.CodeDom.Tests
 	public class ArrayGetSet
 	{
 		private int intField;
-	    private static int staticIntField;
+		private static int staticIntField;
 
-        #region instance, from field (get)
+		#region instance, from field (get)
 
-        private void ArrayGetOneDimension_To_Integer_Field_Method()
+		private void ArrayGetOneDimension_To_Integer_Field_Method()
 		{
 			var arr = new int[10];
 			intField = arr[0];
@@ -45,9 +45,9 @@ namespace Mono.Cecil.CodeDom.Tests
 			Console.WriteLine(method);
 		}
 
-        #endregion 
+		#endregion 
 
-        #region instance, to field (set)
+		#region instance, to field (set)
 
 		private void ArrayGetOneDimension_From_Integer_Field_Method()
 		{
@@ -79,81 +79,81 @@ namespace Mono.Cecil.CodeDom.Tests
 		{
 			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_From_Integer_Field_Method));
 			Console.WriteLine(method);
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region static, from field (get)
+		#region static, from field (get)
 
-        private void ArrayGetOneDimension_Static_To_Integer_Field_Method()
-        {
-            var arr = new int[10];
-            staticIntField = arr[0];
-        }
+		private void ArrayGetOneDimension_Static_To_Integer_Field_Method()
+		{
+			var arr = new int[10];
+			staticIntField = arr[0];
+		}
 
-        /// <summary>
-        /// Basic test for <array>.Length
-        /// </summary>
-        [Test]
-        public void ArrayGetOneDimension_Static_To_Integer_Field()
-        {
-            var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetOneDimension_Static_To_Integer_Field_Method));
-            Console.WriteLine(method);
-        }
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetOneDimension_Static_To_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetOneDimension_Static_To_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
 
-        private void ArrayGetTwoDimension_Static_To_Integer_Field_Method()
-        {
-            var arr = new int[10, 10];
-            staticIntField = arr[0, 1];
-        }
+		private void ArrayGetTwoDimension_Static_To_Integer_Field_Method()
+		{
+			var arr = new int[10, 10];
+			staticIntField = arr[0, 1];
+		}
 
-        /// <summary>
-        /// Basic test for <array>.Length
-        /// </summary>
-        [Test]
-        public void ArrayGetTwoDimension_Static_To_Integer_Field()
-        {
-            var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_Static_To_Integer_Field_Method));
-            Console.WriteLine(method);
-        }
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetTwoDimension_Static_To_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_Static_To_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
 
-        #endregion
+		#endregion
 
-        #region instance, to field (set)
+		#region static, to field (set)
 
-        private void ArrayGetOneDimension_Static_From_Integer_Field_Method()
-        {
-            var arr = new int[10];
-            arr[0] = staticIntField;
-        }
+		private void ArrayGetOneDimension_Static_From_Integer_Field_Method()
+		{
+			var arr = new int[10];
+			arr[0] = staticIntField;
+		}
 
-        /// <summary>
-        /// Basic test for <array>.Length
-        /// </summary>
-        [Test]
-        public void ArrayGetOneDimension_Static_From_Integer_Field()
-        {
-            var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetOneDimension_Static_From_Integer_Field_Method));
-            Console.WriteLine(method);
-        }
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetOneDimension_Static_From_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetOneDimension_Static_From_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
 
-        private void ArrayGetTwoDimension_Static_From_Integer_Field_Method()
-        {
-            var arr = new int[10, 10];
-            arr[0, 1] = staticIntField;
-        }
+		private void ArrayGetTwoDimension_Static_From_Integer_Field_Method()
+		{
+			var arr = new int[10, 10];
+			arr[0, 1] = staticIntField;
+		}
 
-        /// <summary>
-        /// Basic test for <array>.Length
-        /// </summary>
-        [Test]
-        public void ArrayGetTwoDimension_Static_From_Integer_Field()
-        {
-            var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_Static_From_Integer_Field_Method));
-            Console.WriteLine(method);
-        }
+		/// <summary>
+		/// Basic test for <array>.Length
+		/// </summary>
+		[Test]
+		public void ArrayGetTwoDimension_Static_From_Integer_Field()
+		{
+			var method = TestAssemblyAccessor.ParseMethod(MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, ArrayGetTwoDimension_Static_From_Integer_Field_Method));
+			Console.WriteLine(method);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
 // ReSharper restore InconsistentNaming
