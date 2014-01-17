@@ -32,13 +32,13 @@ namespace Mono.Cecil.CodeDom.Parser.SimpleExpressions
 			switch (ReturnType.Name)
 			{
 				case "RuntimeTypeHandle":
-					return string.Format("typeTokenOf({0})", _tokenProvider);
+					return string.Format("/*typeTokenOf*/{0}", _tokenProvider);
 
 				case "RuntimeFieldHandle":
-					return string.Format("fieldTokenOf({0})", _tokenProvider);
+					return string.Format("/*fieldTokenOf*/{0}", _tokenProvider);
 
 				case "RuntimeMethodHandle":
-					return string.Format("methodTokenOf({0})", _tokenProvider);
+					return string.Format("/*methodTokenOf*/{0}", _tokenProvider);
 
 				default:
 					throw new InvalidDataException("Unsupported token type");

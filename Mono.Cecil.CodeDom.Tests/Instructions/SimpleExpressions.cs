@@ -2,6 +2,8 @@ using System;
 using Mono.Cecil.CodeDom.Rocks;
 using NUnit.Framework;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace Mono.Cecil.CodeDom.Tests
 {
@@ -107,6 +109,42 @@ namespace Mono.Cecil.CodeDom.Tests
 				)
 			);
 		}
+		#endregion
+
+		#region sizeof
+
+		[Test]
+		public unsafe void Sizeof()
+		{
+			Console.WriteLine(
+				TestAssemblyAccessor.ParseMethod(
+				MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, 
+					delegate {
+						unsafe {
+							Console.WriteLine(sizeof(DateTime));
+						}
+					})
+				)
+			);
+		}
+
+		#endregion
+
+		#region Metadata tokens
+
+		[Test]
+		public void Load_Method_Metadata_Token()
+		{
+			Console.WriteLine(
+				TestAssemblyAccessor.ParseMethod(
+				MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, 
+					delegate {
+						Console.WriteLine("Hello, {0}", new Func<ConsoleKeyInfo>(Console.ReadKey));
+					})
+				)
+			);
+		}
+
 		#endregion
 	}
 }

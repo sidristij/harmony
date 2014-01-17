@@ -23,7 +23,7 @@ namespace Mono.Cecil.CodeDom.Parser.Pointers
 
 		public override string ToString()
 		{
-			return string.Format("methodof({0})", MethodReference.Name);
+			return string.Format("/*methodof*/{0}", MethodReference.Name);
 		}
 	}
 }
