@@ -69,6 +69,19 @@ namespace Mono.Cecil.CodeDom.Tests
 		}
 		
 		[Test]
+		public void Push_Null()
+		{
+			Console.WriteLine(
+				TestAssemblyAccessor.ParseMethod(
+				MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule, 
+					delegate {
+						Console.WriteLine("Pushing null: {0}", null);
+					})
+				)
+			);
+		}
+				
+		[Test]
 		public void Add_Values_Int_Int()
 		{
 			Console.WriteLine(
