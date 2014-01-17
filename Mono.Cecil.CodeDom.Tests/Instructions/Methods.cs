@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Mono.Cecil.CodeDom.Rocks;
 using System.Collections.Generic;
 
-namespace Mono.Cecil.CodeDom.Tests
+namespace Mono.Cecil.CodeDom.Tests.Instructions
 {
 	[TestFixture]
 	public class Methods

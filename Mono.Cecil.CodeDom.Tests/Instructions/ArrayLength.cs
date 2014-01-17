@@ -1,10 +1,8 @@
 using System;
 using NUnit.Framework;
-using System.Reflection;
 using Mono.Cecil.CodeDom.Rocks;
-using Mono.Cecil.CodeDom.Parser.Arrays;
 
-namespace Mono.Cecil.CodeDom.Tests
+namespace Mono.Cecil.CodeDom.Tests.Instructions
 {
 	[TestFixture]
 	public class ArrayLength

@@ -512,13 +512,6 @@ namespace Mono.Cecil.CodeDom.Parser
 				postfixNode = new CodeDomUnparsedExpression(context, trueStart, trueEnd);	// out of "if-else" block
 			}
 
-			if (current.OpCode.Code == Code.Brfalse)
-			{
-				var tmp = trueNode;
-				trueNode = falseNode;
-				falseNode = tmp;
-			}
-
 			var ifelse = /*((current.OpCode.Code == Code.Brtrue) || (current.OpCode.Code == Code.Brfalse)) ?*/
 				new CodeDomBooleanBranchExpression(context, current, 
 					conditionNode, 

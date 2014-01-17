@@ -1,11 +1,8 @@
 using System;
 using Mono.Cecil.CodeDom.Rocks;
 using NUnit.Framework;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 
-namespace Mono.Cecil.CodeDom.Tests
+namespace Mono.Cecil.CodeDom.Tests.Instructions
 {
 	[TestFixture]
 	public class SimpleExpressions

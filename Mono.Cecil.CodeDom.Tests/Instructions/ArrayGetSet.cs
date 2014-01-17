@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Mono.Cecil.CodeDom.Rocks;
 
 // ReSharper disable InconsistentNaming
-namespace Mono.Cecil.CodeDom.Tests
+namespace Mono.Cecil.CodeDom.Tests.Instructions
 {
 	[TestFixture]
 	public class ArrayGetSet

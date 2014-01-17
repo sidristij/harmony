@@ -88,6 +88,7 @@ namespace Mono.Cecil.CodeDom.Rocks.Cil
 							return MetadataType.Single;
 							break;
 					}
+			        break;
 				case MetadataType.Double:
 					switch (second)
 					{
