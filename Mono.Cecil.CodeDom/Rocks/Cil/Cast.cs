@@ -1,5 +1,6 @@
 using System;
 using Mono.Cecil.Cil;
+using System.Reflection;
 
 namespace Mono.Cecil.CodeDom.Rocks.Cil
 {
@@ -77,6 +78,21 @@ namespace Mono.Cecil.CodeDom.Rocks.Cil
 							{
 								return MetadataType.IntPtr;
 							}
+							break;
+					}
+					break;
+				case MetadataType.Single:
+					switch (second)
+					{
+						case MetadataType.Single:
+							return MetadataType.Single;
+							break;
+					}
+				case MetadataType.Double:
+					switch (second)
+					{
+						case MetadataType.Double:
+							return MetadataType.Double;
 							break;
 					}
 					break;
@@ -170,6 +186,12 @@ namespace Mono.Cecil.CodeDom.Rocks.Cil
 		 * */
 		public static bool AllowsBinaryComparsion(OpCode opcode, MetadataType first, MetadataType second)
 		{
+			if (first == MetadataType.Boolean)
+				first = MetadataType.Int32;
+
+			if (second == MetadataType.Boolean)
+				second = MetadataType.Int32;
+
 			if (first == second)
 			{
 				if (first == MetadataType.ByReference)

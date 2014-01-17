@@ -42,6 +42,7 @@
     <Compile Include="Instructions\ArrayLength.cs" />
     <Compile Include="Instructions\ArrayGetSet.cs" />
     <Compile Include="Instructions\Methods.cs" />
+    <Compile Include="Instructions\SimpleExpressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libs\cecil\Mono.Cecil.csproj">

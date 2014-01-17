@@ -16,6 +16,9 @@ namespace Mono.Cecil.CodeDom.Rocks.Cil
 
 				case MetadataType.Byte:
 					return self.Import(typeof (Byte));
+					
+				case MetadataType.SByte:
+					return self.Import(typeof (SByte));
 
 				case MetadataType.Int16:
 					return self.Import(typeof (Int16));
@@ -40,7 +43,23 @@ namespace Mono.Cecil.CodeDom.Rocks.Cil
 
 				case MetadataType.UIntPtr:
 					return self.Import(typeof (UIntPtr));
+					
+				case MetadataType.Single:
+					return self.Import(typeof (Single));
+					
+				case MetadataType.Double:
+					return self.Import(typeof (Double));
+
+				case MetadataType.Char:
+					return self.Import(typeof (Char));
+
+				case MetadataType.Array:
+					return self.Import(typeof (Array));
+
+				case MetadataType.Void:
+					return self.Import(typeof (void));
 			}
+
 			return null;
 		}
 	}
