@@ -38,7 +38,14 @@ namespace Mono.Cecil.CodeDom.Parser.Tcf
 
 		public override string ToString()
 		{
-			return string.Format("catch({0}{1}){{ {2} }}", Test, VariableReference == null ? "" : " " + VariableReference, Body);
+            if(Test.MetadataType == MetadataType.Object)
+            {
+                return string.Format("catch {{ {0} }}", Body);
+            }
+            else
+            {
+                return string.Format("catch({0}{1}){{ {2} }}", Test, VariableReference == null ? "" : " " + VariableReference, Body);
+            }
 		}
 	}
 }

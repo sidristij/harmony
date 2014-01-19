@@ -39,6 +39,7 @@ namespace Mono.Cecil.CodeDom
 		{
 			var ind = ParentNode.Nodes.IndexOf(this);
 			ParentNode.Nodes[ind] = another;
+
 		}
 
 		/// <summary>

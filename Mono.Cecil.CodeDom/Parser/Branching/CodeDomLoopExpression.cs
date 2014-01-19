@@ -1,3 +1,4 @@
+using System.Linq;
 using Mono.Cecil.Cil;
 using Mono.Cecil.CodeDom.Collections;
 
@@ -37,9 +38,23 @@ namespace Mono.Cecil.CodeDom.Parser.Branching
 
 			if (LoopType == LoopType.DoWhile)
 			{
-				sb.AppendLine("do {");
-				sb.AppendLine(Body.ToString());
-				sb.AppendLine(string.Format("}} while ({0});", Condition));
+                // If Condition contains 
+                if (Condition.IsGroup)
+                {
+                    var lastIndex = Condition.Nodes.Count - 1;
+                    sb.AppendLine("do {");
+                    sb.AppendLine(Body.ToString());
+                    sb.AppendLine(string.Join(System.Environment.NewLine,
+                                              Condition.TakeWhile((node, index) => index != lastIndex)
+                                              .Select(node => node.ToString())));
+                    sb.AppendLine(string.Format("}} while ({0});", Condition.Last()));
+                }
+                else
+                {
+                    sb.AppendLine("do {");
+                    sb.AppendLine(Body.ToString());
+                    sb.AppendLine(string.Format("}} while ({0});", Condition));
+                }
 			}
 			else
 			{

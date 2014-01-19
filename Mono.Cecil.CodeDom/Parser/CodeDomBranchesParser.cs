@@ -38,7 +38,8 @@ namespace Mono.Cecil.CodeDom.Parser
 			var cecilHandlers = context.Method.Body.ExceptionHandlers;
 
 			// Groups of handlers - when one Try have many Catches or/and Finally block
-			var groups = cecilHandlers.GroupBy(item => new { item.TryStart, item.TryEnd });
+		    var groups = cecilHandlers.GroupBy(item => new {item.TryStart, item.TryEnd}).OrderByDescending(gr => gr.Key.TryEnd.Offset);
+		    var root = this.MethodBodyRoot;
 
 			foreach (var grouping in groups)
 			{
@@ -46,7 +47,7 @@ namespace Mono.Cecil.CodeDom.Parser
 
 				// split if needed, and return Expression, that covers TCF block
 				var tcfblock = SplitGroupAndReplace(context, tryinfo.TryStart, grouping.Last().HandlerEnd.Previous, groupit: true);
-				var tryblock = SplitGroupAndReplace(context, tryinfo.TryStart, tryinfo.TryEnd.Previous, exp_root: tcfblock);
+				var tryblock = SplitGroupAndReplace(context, tryinfo.TryStart, tryinfo.TryEnd.Previous, groupit: true, exp_root: tcfblock);
 
 				CodeDomExpression faultBlock = null;
 				CodeDomExpression finallyBlock = null;
@@ -84,8 +85,7 @@ namespace Mono.Cecil.CodeDom.Parser
 
 				// replace with our result
 				var tcf = new TryExpression(context, grouping.ToList(), tryblock, faultBlock, filterBlock, finallyBlock, catches.ToArray());
-				tcfblock.ParentNode.Nodes[tcfblock.ParentNode.Nodes.IndexOf(tcfblock)] = tcf;
-				tcf.ParentNode = tcfblock.ParentNode;
+				tcfblock.ReplaceWith(tcf);
 			}
 		}
 
@@ -512,7 +512,7 @@ namespace Mono.Cecil.CodeDom.Parser
 				postfixNode = new CodeDomUnparsedExpression(context, trueStart, trueEnd);	// out of "if-else" block
 			}
 
-			var ifelse = /*((current.OpCode.Code == Code.Brtrue) || (current.OpCode.Code == Code.Brfalse)) ?*/
+			var ifelse =
 				new CodeDomBooleanBranchExpression(context, current, 
 					conditionNode, 
 					new CodeDomGroupExpression(context) { trueNode }, 

@@ -194,7 +194,7 @@ namespace Mono.Cecil.CodeDom.Parser
 					case Code.Brfalse:  // if false, 0, null
 					case Code.Brtrue:   // if true, <>0, <>null
 					{
-						var exp_condition = new Mono.Cecil.CodeDom.Parser.Branching.CodeDomBoolConditionExpression(context, _stack.Pop());  
+						var exp_condition = new Branching.CodeDomBoolConditionExpression(context, _stack.Pop());  
 						//_solved.Add(current, exp_condition);
 						parsedNodes.Add(exp_condition);
 						current = current.Next;
@@ -202,6 +202,11 @@ namespace Mono.Cecil.CodeDom.Parser
 					}
 
 					case Code.Br:       // Unconditional
+				    {
+                        Console.WriteLine("Uncovered unconditional Branch");
+                        current = current.Next;
+				        break;
+				    }
 					case Code.Beq:      // if 2 values equal
 					case Code.Bge:      // if first >= second
 					case Code.Bgt:      // if first > second
