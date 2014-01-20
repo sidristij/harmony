@@ -91,10 +91,7 @@
     <Compile Include="Parser\Tcf\CatchBlockExpression.cs" />
     <Compile Include="TextFormatter\ITextFormatter.cs" />
     <Compile Include="Parser\Branching\CodeDomBranchingExpression.cs" />
-    <Compile Include="Parser\Branching\CodeDomBooleanBranchExpression.cs" />
-    <Compile Include="Parser\Branching\CodeDomComparingBranchExpression.cs" />
     <Compile Include="Parser\CodeDomBranchesParser.cs" />
-    <Compile Include="Parser\Branching\CodeDomBoolConditionExpression.cs" />
     <Compile Include="Rocks\FieldRef.cs" />
     <Compile Include="Parser\Branching\CodeDomLoopExpression.cs" />
     <Compile Include="Parser\SimpleExpressions\NegExpression.cs" />
@@ -121,6 +118,8 @@
     <Compile Include="Rocks\InstructionEx.cs" />
     <Compile Include="Messaging\ParserStateException.cs" />
     <Compile Include="Parser\SimpleExpressions\CodeDomSingleInstructionExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomConditionExpression.cs" />
+    <Compile Include="Parser\Branching\CodeDomIfElseExpression.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

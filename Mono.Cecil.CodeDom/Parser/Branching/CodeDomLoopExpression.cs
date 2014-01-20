@@ -16,7 +16,8 @@ namespace Mono.Cecil.CodeDom.Parser.Branching
 		public const int BodyExpressionPos = 1;
 		public const int MaxNodes = 2;
 
-		public CodeDomLoopExpression(Context context, Instruction incomingJump, Instruction loopJump, LoopType looptype, CodeDomExpression exp_condition, CodeDomExpression exp_body) : base(context, loopJump)
+		public CodeDomLoopExpression(Context context, Instruction incomingJump, Instruction loopJump, LoopType looptype, 
+		                             CodeDomConditionExpression exp_condition, CodeDomExpression exp_body) : base(context, loopJump)
 		{
 			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
 			if(incomingJump != null)
@@ -28,7 +29,7 @@ namespace Mono.Cecil.CodeDom.Parser.Branching
 
 		public LoopType LoopType { get; private set; }
 
-		public CodeDomExpression Condition { get { return Nodes[ConditionPos]; } private set { Nodes[ConditionPos] = value; value.ParentNode = this; } }
+		public CodeDomConditionExpression Condition { get { return (CodeDomConditionExpression)Nodes[ConditionPos]; } private set { Nodes[ConditionPos] = value; value.ParentNode = this; } }
 
 		public CodeDomExpression Body { get { return Nodes[BodyExpressionPos]; } private set { Nodes[BodyExpressionPos] = value; value.ParentNode = this; } }
 

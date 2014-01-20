@@ -4,6 +4,7 @@ using Mono.Cecil.Cil;
 using System.Linq;
 using Mono.Cecil.CodeDom.Parser.Branching;
 using Mono.Cecil.CodeDom.Parser.Tcf;
+using System.Runtime.InteropServices;
 
 namespace Mono.Cecil.CodeDom.Parser
 {
@@ -393,7 +394,8 @@ namespace Mono.Cecil.CodeDom.Parser
 		private void ParseLoop(Context context, Instruction from, Instruction to, CodeDomUnparsedExpression expression, Instruction current, bool doWhileJump)
 		{
 			var group = new CodeDomGroupExpression(context);
-			CodeDomUnparsedExpression prefix = null, condition, body, postfix = null;
+			CodeDomUnparsedExpression prefix = null, conditionResult, body, postfix = null;
+			CodeDomConditionExpression condition;
 			LoopType looptype;
 
 			// we have while(){ ... } which is made via do{ ... } while(); template
@@ -405,8 +407,24 @@ namespace Mono.Cecil.CodeDom.Parser
 					prefix = new CodeDomUnparsedExpression(context, from, current.Previous);
 
 				body = new CodeDomUnparsedExpression(context , current.Next , (current.Operand as Instruction).Previous);
+
+				// condition
 				var conditionEnd = _incoming[body.Instructions.First];
-				condition = new CodeDomUnparsedExpression(context , body.Instructions.Last.Next , conditionEnd);
+				var conditionStart = ResolveStackBlockStart(conditionEnd);
+				conditionResult = new CodeDomUnparsedExpression(context , conditionStart , conditionEnd);
+
+				var conditionEvalStart = body.Instructions.Last.Next;
+				var conditionEvalEnd = conditionStart.Previous;
+
+				if (conditionEvalEnd.Offset >= conditionEvalStart.Offset)
+				{
+					var conditionEvaluation = new CodeDomUnparsedExpression(context, body.Instructions.Last.Next, conditionStart.Previous);
+					condition = new CodeDomConditionExpression(context, conditionResult, conditionEvaluation);
+				}
+				else
+				{
+					condition = new CodeDomConditionExpression(context, conditionResult);
+				}
 
 				if(conditionEnd.Offset < to.Offset)
 					postfix = new CodeDomUnparsedExpression(context, conditionEnd.Next, to);
@@ -434,7 +452,19 @@ namespace Mono.Cecil.CodeDom.Parser
 					if(from.Offset < conditionStart.Offset)
 						prefix = new CodeDomUnparsedExpression(context, from, conditionStart.Previous);
 
-					condition = new CodeDomUnparsedExpression(context, conditionStart, conditionEnd);
+					conditionResult = new CodeDomUnparsedExpression(context, conditionStart, conditionEnd);
+
+					var conditionEvalStart = current;
+					var conditionEvalEnd = conditionStart.Previous;
+
+					if (conditionEvalEnd.Offset > conditionEvalStart.Offset)
+					{
+						condition = new CodeDomConditionExpression(context, conditionResult, new CodeDomUnparsedExpression(context, conditionEvalStart, conditionEvalEnd));
+					}
+					else
+					{
+						condition = new CodeDomConditionExpression(context, conditionResult);
+					}
 					body = new CodeDomUnparsedExpression(context, conditionEnd.Next, incoming);
 
 					if(incoming.Offset < to.Offset)
@@ -450,7 +480,8 @@ namespace Mono.Cecil.CodeDom.Parser
 					if(from.Offset < current.Offset)
 						prefix = new CodeDomUnparsedExpression(context, from, current.Previous);
 
-					condition = new CodeDomUnparsedExpression(context, conditionStart, incoming);
+					conditionResult = new CodeDomUnparsedExpression(context, conditionStart, incoming);
+					condition = new CodeDomConditionExpression(context, conditionResult);
 					body = new CodeDomUnparsedExpression(context, current, conditionStart.Previous);
 
 					if(incoming.Offset < to.Offset)
@@ -460,7 +491,7 @@ namespace Mono.Cecil.CodeDom.Parser
 				}
 			}
 
-			var condinstruction = condition.Instructions.Last;
+			var condinstruction = conditionResult.Instructions.Last;
 			if(prefix != null) group.Add(prefix);
 			group.Add(new CodeDomLoopExpression(context, doWhileJump ? current : null, condinstruction, looptype, condition, body));
 			if(postfix != null) group.Add(postfix);
@@ -513,8 +544,8 @@ namespace Mono.Cecil.CodeDom.Parser
 			}
 
 			var ifelse =
-				new CodeDomBooleanBranchExpression(context, current, 
-					conditionNode, 
+				new CodeDomIfElseExpression(context, current, 
+					new CodeDomConditionExpression(context, conditionNode), 
 					new CodeDomGroupExpression(context) { trueNode }, 
 					new CodeDomGroupExpression(context) { falseNode }
 				);

@@ -194,19 +194,18 @@ namespace Mono.Cecil.CodeDom.Parser
 					case Code.Brfalse:  // if false, 0, null
 					case Code.Brtrue:   // if true, <>0, <>null
 					{
-						var exp_condition = new Branching.CodeDomBoolConditionExpression(context, _stack.Pop());  
-						//_solved.Add(current, exp_condition);
+						var exp_condition = new Branching.CodeDomConditionExpression(context, _stack.Pop());  
 						parsedNodes.Add(exp_condition);
 						current = current.Next;
 						break;
 					}
 
 					case Code.Br:       // Unconditional
-				    {
-                        Console.WriteLine("Uncovered unconditional Branch");
-                        current = current.Next;
-				        break;
-				    }
+					{
+						Console.WriteLine("Uncovered unconditional Branch");
+						current = current.Next;
+						break;
+					}
 					case Code.Beq:      // if 2 values equal
 					case Code.Bge:      // if first >= second
 					case Code.Bgt:      // if first > second
@@ -677,7 +676,7 @@ namespace Mono.Cecil.CodeDom.Parser
 
 					default:
 						Console.WriteLine("Uncovered instruction found: {0} on 0x{1:X} ", current.OpCode.Code, current.Offset);
-						parsedNodes.Add(CodeDom.UncoveredInstruction(context, current));
+						//parsedNodes.Add(CodeDom.UncoveredInstruction(context, current));
 						current = current.Next;
 						break;
 				}

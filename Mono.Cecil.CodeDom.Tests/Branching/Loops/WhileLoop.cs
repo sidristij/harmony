@@ -7,8 +7,27 @@ namespace Mono.Cecil.CodeDom.Tests.Branching.Loops
     [TestFixture]
     public class WhileLoop
     {
-        [Test]
+		[Test]
         public void Simple_Condition()
+        {
+            Console.WriteLine(
+                TestAssemblyAccessor.ParseMethod(
+                MethodDef.Of(TestAssemblyAccessor.Assembly.MainModule,
+                    delegate
+                    {
+						int x = 0;
+                        while(x < 10)
+                        {
+                            Console.WriteLine("Cool");
+							x++;
+                        }
+                    })
+                )
+            );
+        }
+
+        [Test]
+        public void Complex_Condition()
         {
             Console.WriteLine(
                 TestAssemblyAccessor.ParseMethod(
@@ -25,7 +44,7 @@ namespace Mono.Cecil.CodeDom.Tests.Branching.Loops
         }
 
         [Test]
-        public void Simple_Condition_Before()
+		public void Complex_Condition_Before()
         {
             Console.WriteLine(
                 TestAssemblyAccessor.ParseMethod(
@@ -44,7 +63,7 @@ namespace Mono.Cecil.CodeDom.Tests.Branching.Loops
         }
 
         [Test]
-        public void Simple_Condition_Before_After()
+		public void Complex_Condition_Before_After()
         {
             Console.WriteLine(
                 TestAssemblyAccessor.ParseMethod(

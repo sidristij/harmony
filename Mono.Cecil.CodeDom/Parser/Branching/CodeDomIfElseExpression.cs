@@ -3,14 +3,14 @@ using Mono.Cecil.CodeDom.Collections;
 
 namespace Mono.Cecil.CodeDom.Parser.Branching
 {
-	public sealed class CodeDomBooleanBranchExpression : CodeDomBranchingExpression
+	public sealed class CodeDomIfElseExpression : CodeDomBranchingExpression
 	{
 		public const int ConditionPos = 0;
 		public const int TrueExpressionPos = 1;
 		public const int FalseExpressionPos = 2;
 		public const int MaxNodes = 3;
 
-		public CodeDomBooleanBranchExpression(Context context, Instruction target, CodeDomExpression exp_condition, CodeDomExpression exp_ontrue, CodeDomExpression exp_onfalse) : base(context, target)
+		public CodeDomIfElseExpression(Context context, Instruction target, CodeDomConditionExpression exp_condition, CodeDomExpression exp_ontrue, CodeDomExpression exp_onfalse) : base(context, target)
 		{
 			Nodes = new FixedList<CodeDomExpression>(MaxNodes);
 			Context.SetExpression(target, this);
@@ -19,7 +19,7 @@ namespace Mono.Cecil.CodeDom.Parser.Branching
 			FalseExpression = exp_onfalse;
 		}
 
-		public CodeDomExpression Condition { get { return Nodes[ConditionPos]; } private set { Nodes[ConditionPos] = value; value.ParentNode = this; } }
+		public CodeDomConditionExpression Condition { get { return (CodeDomConditionExpression) Nodes[ConditionPos]; } private set { Nodes[ConditionPos] = value; value.ParentNode = this; } }
 
 		public CodeDomExpression TrueExpression { get { return Nodes[TrueExpressionPos]; } private set { Nodes[TrueExpressionPos] = value; value.ParentNode = this; } }
 
