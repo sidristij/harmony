@@ -39,8 +39,8 @@ namespace Mono.Cecil.CodeDom.Parser
 			var cecilHandlers = context.Method.Body.ExceptionHandlers;
 
 			// Groups of handlers - when one Try have many Catches or/and Finally block
-		    var groups = cecilHandlers.GroupBy(item => new {item.TryStart, item.TryEnd}).OrderByDescending(gr => gr.Key.TryEnd.Offset);
-		    var root = this.MethodBodyRoot;
+			var groups = cecilHandlers.GroupBy(item => new {item.TryStart, item.TryEnd}).OrderByDescending(gr => gr.Key.TryEnd.Offset);
+			var root = this.MethodBodyRoot;
 
 			foreach (var grouping in groups)
 			{
@@ -57,12 +57,26 @@ namespace Mono.Cecil.CodeDom.Parser
 
 				foreach (var handler in grouping)
 				{
-					var group = SplitGroupAndReplace(context, handler.HandlerStart, handler.HandlerEnd.Previous, exp_root: tcfblock);
+					var group = SplitGroupAndReplace(context, handler.HandlerStart, handler.HandlerEnd.Previous, 
+					                                                          exp_root: tcfblock);
 
 					switch (handler.HandlerType)
 					{
 						case ExceptionHandlerType.Catch:
 							catches.Add(new CatchBlockExpression(context, handler.CatchType, group));
+
+							// looking up first instructions list
+							var expression = group.FindFirstPostorder<CodeDomUnparsedExpression>();
+
+							// making temp variable
+							var catchVariable = new VariableDefinition("<harmony_catch_variable>", handler.CatchType);
+							context.Method.Body.Variables.Add(catchVariable);
+
+							// inserting push variable before first instruction
+							var ilprocessor = context.Method.Body.GetILProcessor();
+							var instruction = Instruction.Create(OpCodes.Ldloc, catchVariable);
+							ilprocessor.InsertBefore(expression.Instructions.First, instruction);
+							expression.Instructions.First = instruction;
 							break;
 
 						case ExceptionHandlerType.Filter:

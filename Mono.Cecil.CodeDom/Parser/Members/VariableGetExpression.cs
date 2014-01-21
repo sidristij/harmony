@@ -28,6 +28,8 @@ namespace Mono.Cecil.CodeDom.Parser.Members
 
 		public VariableReference VariableReference { get; private set; }
 
+		public bool IsCatchVariable { get { return false; } }
+
 		public override string ToString()
 		{
 			return string.Format("{0}", VariableReference);

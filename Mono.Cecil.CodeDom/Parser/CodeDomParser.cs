@@ -24,13 +24,13 @@ namespace Mono.Cecil.CodeDom.Parser
 			var context = new Context(def_method, this);
 			var parsedNodes = new List<CodeDomExpression>();
 			CodeDomExpression exceptionVariable = null;
-
+			/*
 			if (catchBlock != null)
 			{
 				exceptionVariable = CodeDom.CatchPush(context, catchBlock.Test);
 				_stack.Push(exceptionVariable);
 			}
-
+*/
 			// While we have instruction and instruction is not covered yet
 			while (current != last && current != null)
 			{
@@ -174,7 +174,6 @@ namespace Mono.Cecil.CodeDom.Parser
 						PushToStack(CodeDom.CreateArray(context, current, ref_type, exp_length: _stack.Pop()));
 						current = current.Next;
 						break;
-
 					}
 
 					/* array.Length */
@@ -258,6 +257,8 @@ namespace Mono.Cecil.CodeDom.Parser
 					}
 					#endregion
 
+					#region Arrays
+
 					case Code.Ldelema:      // need to cast
 					case Code.Ldelem_Any:   // need to cast
 					case Code.Ldelem_Ref:   // need to cast
@@ -303,6 +304,8 @@ namespace Mono.Cecil.CodeDom.Parser
 						current = current.Next;
 						break;
 					}
+
+					#endregion
 
 					#region misc
 
@@ -405,7 +408,7 @@ namespace Mono.Cecil.CodeDom.Parser
 					case Code.Ldind_R8:
 					case Code.Ldind_Ref:
 					{
-						PushToStack(CodeDom.PtrCastToPointer(current, ref_instance: _stack.Pop()));
+						PushToStack(CodeDom.PtrCastToPointer(current, _stack.Pop()));
 						current = current.Next;
 						break;
 					}

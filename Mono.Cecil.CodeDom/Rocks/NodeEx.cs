@@ -2,6 +2,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Cecil.CodeDom
 {
@@ -34,10 +36,10 @@ namespace Mono.Cecil.CodeDom
 			node.Visit(null, action);
 		}
 
-		public static T FindFirstPostorder<T>([CanBeNull] this CodeDomExpression node, [NotNull] Predicate<T> predicate) where T : CodeDomExpression
+		public static T FindFirstPostorder<T>([CanBeNull] this CodeDomExpression node, [NotNull] Predicate<T> predicate = null) where T : CodeDomExpression
 		{
 			if (predicate == null)
-				throw new ArgumentNullException("predicate");
+				predicate = _ => true;
 
 			if (node == null)
 				return default (T);
@@ -236,7 +238,8 @@ namespace Mono.Cecil.CodeDom
 			return subTree;
 		}
 
-		public static IEnumerable<TResult> SelectNodes<TResult>(this CodeDomExpression node, Predicate<TResult> checker = null) where TResult: class 
+		public static IEnumerable<TResult> SelectNodes<TResult>(this CodeDomExpression node, Predicate<TResult> checker = null) 
+			where TResult : CodeDomExpression
 		{
 			var queue = new Queue<CodeDomExpression>();
 			queue.Enqueue(node);
@@ -253,6 +256,19 @@ namespace Mono.Cecil.CodeDom
 				{
 					queue.Enqueue(item);
 				}
+			}
+		}
+
+		public static IEnumerable<TResult> Parents<TResult>(this CodeDomExpression node, Predicate<TResult> checker = null) 
+			where TResult : CodeDomExpression
+		{
+			CodeDomExpression parent = node.ParentNode;
+			while(parent != null) 
+			{
+				if(checker((TResult)parent))
+					yield return (TResult)parent;
+
+				parent = parent.ParentNode;
 			}
 		}
 	}

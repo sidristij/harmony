@@ -3,7 +3,6 @@ using Mono.Cecil.CodeDom.Collections;
 
 namespace Mono.Cecil.CodeDom.Parser.Tcf
 {
-
 	public sealed class CatchBlockExpression : CodeDomExpression
 	{
 		public const int BodyPos = 0;
