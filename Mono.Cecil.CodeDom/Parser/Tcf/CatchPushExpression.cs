@@ -26,6 +26,11 @@ namespace Mono.Cecil.CodeDom.Parser.Tcf
 		{
 			get { return false; }
 		}
+
+		public override string ToString()
+		{
+			return string.Format("[CatchPushExpression]");
+		}
 	}
 }
 

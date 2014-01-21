@@ -32,7 +32,7 @@ namespace Mono.Cecil.CodeDom.Tests
 
 			foreach(var unparsed in superNode.SelectNodes<CodeDomUnparsedExpression>())
 			{
-				var parsed = codeparser.Parse(method_def, unparsed.Instructions.First, unparsed.Instructions.Last);
+				var parsed = codeparser.Parse(context, method_def, unparsed.Instructions.First, unparsed.Instructions.Last);
 				unparsed.ReplaceWith(parsed);
 			}
 

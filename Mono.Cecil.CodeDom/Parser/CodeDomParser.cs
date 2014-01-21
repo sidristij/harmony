@@ -4,6 +4,7 @@ using System.Linq;
 using Mono.Cecil.Cil;
 using Mono.Cecil.CodeDom.Parser.Members;
 using Mono.Cecil.CodeDom.Parser.Tcf;
+using System.Security.Policy;
 
 namespace Mono.Cecil.CodeDom.Parser
 {
@@ -17,20 +18,12 @@ namespace Mono.Cecil.CodeDom.Parser
 			return node;
 		}
 
-		public CodeDomExpression Parse(MethodDefinition def_method, Instruction start, Instruction end = null, CatchBlockExpression catchBlock = null)
+		public CodeDomExpression Parse(Context context, MethodDefinition def_method, Instruction start, Instruction end = null)
 		{
 			var current = start;
 			var last = end == null ? null : end.Next;
-			var context = new Context(def_method, this);
 			var parsedNodes = new List<CodeDomExpression>();
-			CodeDomExpression exceptionVariable = null;
-			/*
-			if (catchBlock != null)
-			{
-				exceptionVariable = CodeDom.CatchPush(context, catchBlock.Test);
-				_stack.Push(exceptionVariable);
-			}
-*/
+
 			// While we have instruction and instruction is not covered yet
 			while (current != last && current != null)
 			{
@@ -150,7 +143,25 @@ namespace Mono.Cecil.CodeDom.Parser
 					/* Stack -> Variable */
 					case Code.Stloc:
 					{
-						parsedNodes.Add(CodeDom.VariableSet(context, current, (VariableReference)current.Operand, exp_value: _stack.Pop()));
+						var variable = (VariableReference)current.Operand;
+						CodeDomExpression exp_value;
+						if(!_stack.Any())
+						{
+							var catchBlock = context.UserLocals.FirstOrDefault( kv => (kv.Value == current)).Key;
+							if(catchBlock != null)
+							{
+								exp_value = new CatchPushExpression(context, variable.VariableType);
+							}
+							else 
+							{
+								throw new InvalidOperationException("Trying to get variable for catch, but no UserLocals key found");
+							}
+						}
+						else 
+						{
+							exp_value = _stack.Pop();
+						}
+						parsedNodes.Add(CodeDom.VariableSet(context, current, (VariableReference)current.Operand, exp_value: exp_value));
 						current = current.Next;
 						break;
 					}
@@ -545,12 +556,19 @@ namespace Mono.Cecil.CodeDom.Parser
 
 					case Code.Pop:
 					{
-						var expr = _stack.Pop();
-						if (_stack.Count == 0)
+						if (!_stack.Any() && context.UserLocals.ContainsValue(current))
 						{
-							parsedNodes.Add(expr);
+							current = current.Next;
 						}
-						current = current.Next;
+						else
+						{
+							var expr = _stack.Pop();
+							if (_stack.Count == 0)
+							{
+								parsedNodes.Add(expr);
+							}
+							current = current.Next;
+						}
 						break;
 					}
 
@@ -703,14 +721,6 @@ namespace Mono.Cecil.CodeDom.Parser
 					node.ParentNode = group;
 				}
 			}
-
-			// resolve catch variable
-			if (catchBlock != null && exceptionVariable.ParentNode is VariableSetExpression)
-			{
-				catchBlock.VariableReference = (exceptionVariable.ParentNode as VariableSetExpression).VariableReference;
-			}
-
-			root.ParentNode = catchBlock;
 			return root;
 		}
 	}

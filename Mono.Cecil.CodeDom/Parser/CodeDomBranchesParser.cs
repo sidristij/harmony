@@ -5,6 +5,8 @@ using System.Linq;
 using Mono.Cecil.CodeDom.Parser.Branching;
 using Mono.Cecil.CodeDom.Parser.Tcf;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Runtime.CompilerServices;
 
 namespace Mono.Cecil.CodeDom.Parser
 {
@@ -63,20 +65,19 @@ namespace Mono.Cecil.CodeDom.Parser
 					switch (handler.HandlerType)
 					{
 						case ExceptionHandlerType.Catch:
-							catches.Add(new CatchBlockExpression(context, handler.CatchType, group));
+							var catchExpression = new CatchBlockExpression(context, handler.CatchType, group);
+							catches.Add(catchExpression);
 
 							// looking up first instructions list
 							var expression = group.FindFirstPostorder<CodeDomUnparsedExpression>();
 
-							// making temp variable
-							var catchVariable = new VariableDefinition("<harmony_catch_variable>", handler.CatchType);
-							context.Method.Body.Variables.Add(catchVariable);
-
-							// inserting push variable before first instruction
-							var ilprocessor = context.Method.Body.GetILProcessor();
-							var instruction = Instruction.Create(OpCodes.Ldloc, catchVariable);
-							ilprocessor.InsertBefore(expression.Instructions.First, instruction);
-							expression.Instructions.First = instruction;
+							// looking up instruction, which reads exception from stack
+							var instruction = ResolveStackBlockEnd(expression.Instructions.First, -1);
+							if (instruction != null)
+							{
+								catchExpression.VariableReference = (instruction.Operand as VariableReference);
+								context.UserLocals[catchExpression] = instruction;
+							}
 							break;
 
 						case ExceptionHandlerType.Filter:
@@ -633,6 +634,22 @@ namespace Mono.Cecil.CodeDom.Parser
 			} while(stack_delta != 0);
 
 			return current.Next;
+		}
+
+		private Instruction ResolveStackBlockEnd(Instruction from, int stackSizeWeNeed)
+		{
+			var current = from;
+			var stack_delta = 0;
+			do
+			{
+				stack_delta += current.StackDelta(forward: true);
+				if(stack_delta == stackSizeWeNeed)
+					return current;
+
+				current = current.Next;
+			} while (current != null);
+
+			return null;
 		}
 
 		private bool FindFlowControl(Instruction fromStart, Instruction fromEnd, 

@@ -3,6 +3,7 @@ using Mono.Cecil.Cil;
 using Mono.Cecil.CodeDom.Rocks;
 using Mono.Cecil.CodeDom.Parser;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Mono.Cecil.CodeDom
 {
@@ -18,6 +19,7 @@ namespace Mono.Cecil.CodeDom
 			Method = method;
 			Parser = parser;
 			_map = new Dictionary<Instruction, CodeDomExpression>();
+			UserLocals = new Dictionary<object, object>();
 		}
 
 		public void SetExpression(Instruction instruction, CodeDomExpression expression)
@@ -35,6 +37,8 @@ namespace Mono.Cecil.CodeDom
 		public MethodDefinition Method { get; protected set; }
 
 		public CodeDomParserBase Parser { get; protected set; }
+
+		public Dictionary<object, object> UserLocals { get; private set; }
 
 		#region MethodRef
 
