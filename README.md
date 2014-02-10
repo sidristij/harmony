@@ -1,9 +1,8 @@
 Harmony Core
 ============
 
-Harmony Core is Mono.Cecil -> AST transformer.
-After Cecil reader, you'll have full tree of types and types contents, but in methods you'll see only IL. 
+Harmony Core is Mono.Cecil -> AST [-> C#] transformer.
 
-As option, Harmony includes AST -> C# transformer.
+Many functions are covered by unit tests. It is in development phase and I hope to find "Bro" to finish it together :)
 
 Any help is welcome :).
